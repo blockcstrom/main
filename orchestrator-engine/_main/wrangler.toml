@@ -1,0 +1,36 @@
+name = "orchestrator-engine"
+main = "dist/index.js"
+compatibility_date = "2024-01-01"
+node_compat = true
+
+[vars]
+ENVIRONMENT = "production"
+CLOUDFLARE_ZONE_ID=""
+CLOUDFLARE_API_TOKEN=""
+DNS_RECORD_ID=""
+GALIO_TUNNEL_ID=""
+GALIO_TOKEN=""
+BORIO_TUNNEL_ID=""
+BORIO_TOKEN=""
+TARGET_DOMAIN="controller.kill-kick.shop"
+ROTATION_INTERVAL_MINUTES=340
+ROTATION_JITTER_MINUTES=10
+HEALTH_CHECK_RETRIES=15
+HEALTH_CHECK_INTERVAL_SECONDS=10
+BASIC_AUTH_USER=admin
+BASIC_AUTH_PASS=""
+
+[[r2_buckets]]
+binding = "ZIP_STORAGE"
+bucket_name = "orchestrator-zip-files"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "orchestrator-engine"
+database_id = ""
+
+[triggers]
+crons = ["*/5 * * * *"]
+
+[build]
+command = "npm run build"
